@@ -1,4 +1,4 @@
-548139d3f6548d4d99de49517ace9637 *DESCRIPTION
+ac4320b31ad2a418f4230afb7aeccde0 *DESCRIPTION
 37a7d3c34906307f1061ba01b0abbbe9 *NAMESPACE
 efbf1e82851b3e6256f90b539f527b89 *NEWS.md
 fb333701a971714ec0ba21c24bf1b785 *R/data.R
@@ -8,14 +8,14 @@ e555eed447a595778c53ddecd923e5bf *R/dwelling.R
 178d0bc3f499b5d7225066629eaa599c *R/employment.R
 dae731164519f42d98bdbff17da02a5c *R/get_dictionary.R
 a2b20f9a2253268cead21df66e23e674 *R/get_estimation.R
-39aa0519ac184685688fba3bf3c555a7 *R/get_microdata.R
+7ca859120dac88a68361b0de9cbd4d94 *R/get_microdata.R
 a98c40408d1d0c1c1650c136857662ec *R/household_type.R
 5489beff743ea1f84fe1ab5297829a77 *R/income.R
 22bb8dbcd53fee60358829d38e9bcc02 *R/organize.R
 c82618144c657fa851eb60f928762eb5 *R/poverty.R
 0271e80bb049dd82d00c308718756334 *R/set_design.R
 29baa411ba997c7329c1ec0a794064d3 *R/sysdata.rda
-3a3ed4ffe19b45e0c0633f005e892320 *R/utils.R
+29e4a7ee839942cd8c81b5f0cd832237 *R/utils.R
 12d01651776f816a08e6c194998b8e25 *README.md
 45638e2d805ef7334901fb7543936666 *build/vignette.rds
 aa0e34906eb3f90a03511e71e7a76d4d *data/cba_cbna_int.rda
@@ -38,7 +38,7 @@ c2b0df5a27b1bd27502bb0bcc3e269e4 *inst/doc/Educacion.R
 2bdf2cb64b81d9aebd4b2286771e7e47 *inst/doc/Educacion.html
 e293a1dcf9b677fe687f0bc3adb9c584 *inst/doc/ech.R
 d210129a325fcc40bff993e6e04cfee0 *inst/doc/ech.Rmd
-8aa49caba850667bb54d43ab4e42ee9f *inst/doc/ech.html
+3fcd698ae2a1707bfcf1d85d744e2fcb *inst/doc/ech.html
 60026f2aafe459281fb8345d97c0a8b1 *inst/doc/estimacion_ingresos.R
 458b57ed1e7c28d6c0d5690aaac0b90f *inst/doc/estimacion_ingresos.Rmd
 b5d2f8d2ea633033f48dd13ed03ba21e *inst/doc/estimacion_ingresos.html
@@ -50,7 +50,7 @@ ef3159e7e36e5db719cc7b9246f5f2c7 *inst/extdata/toy_ech_2018.rda
 9023b3750f76e9c6e51ebe54aebda280 *man/add_geom.Rd
 61b2181c0f25b3a0b39d2f65061b5a03 *man/age_groups.Rd
 736fa04e64fd434e941fa6d3480f222e *man/archiveExtractBinary.Rd
-0c66d38a78be219f0519a19b43342c62 *man/archive_extract.Rd
+c9b3433e2592beca89491b8164435678 *man/archive_extract.Rd
 e46b97e71e20dbc26f2c83fff7ddb66d *man/basket_goods.Rd
 276170a0fd3af2e3473fdac00ace6032 *man/branch_ciiu.Rd
 d4505fa9cca0d404a057b193749a9afd *man/cba_cbna_int.Rd
@@ -98,7 +98,7 @@ c34deabe55633491f3225c1fec05c021 *man/isWindows.Rd
 4b47ed83c0facd48c47644a28331e81a *man/labor_income_per_hour.Rd
 61aca935c9f4bc7a3dd8dd2d91b3143e *man/level_completion.Rd
 f9d45233889932bbe5333d8c6041acc2 *man/level_education.Rd
-95d28c90aecd54d8e7627c85a3f3422b *man/organize_ht11.Rd
+5185ac75cec6790e5f53146b2bf3801e *man/organize_ht11.Rd
 0c9f23210b33af73b57b030165c8fa5b *man/organize_names.Rd
 e2515aec9b005f26c9c85733fd5b8988 *man/overcrowding.Rd
 d6f0625b830e68772d424ef93f35c523 *man/pipe.Rd
