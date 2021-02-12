@@ -21,13 +21,9 @@ This function allows you to get the IPAB (Indice de precios de alimentos y bebid
 Disclaimer: This script is not an official INE product.
 Aviso: El script no es un producto oficial de INE.
 }
-\examples{
-get_ipab(folder = tempdir())
-}
 \seealso{
 Other dwnld_read: 
 \code{\link{get_cba_cbna}()},
-\code{\link{get_ciiu}()},
 \code{\link{get_dictionary}()},
 \code{\link{get_ipab_region}()},
 \code{\link{get_ipc_region}()},

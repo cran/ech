@@ -23,13 +23,8 @@ This function allows you to get the CBA and CBNA data
 Disclaimer: This script is not an official INE product.
 Aviso: El script no es un producto oficial de INE.
 }
-\examples{
-get_cba_cbna(folder = tempdir(), region = "M")
-
-}
 \seealso{
 Other dwnld_read: 
-\code{\link{get_ciiu}()},
 \code{\link{get_dictionary}()},
 \code{\link{get_ipab_region}()},
 \code{\link{get_ipab}()},
