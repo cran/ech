@@ -1,5 +1,11 @@
 # log history of ech package development
 
+## ech v0.1.2.0
+*minor changes. fix organize_names
+
+## ech v0.1.1.3
+*minor changes. fix organize_names
+
 ## ech v0.1.1.2
 * ommited get_* functions for bug in macos
 * removed some dependences

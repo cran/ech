@@ -4,6 +4,7 @@
 #' @param level (string) indicates whether the base to be labelled is of the type "household", "h", "individual", "i" or both, "hyp". Default "hyp"
 #' @param year numeric reference year of the data. Available from 2011 to 2019
 #' @export
+#' @importFrom dplyr if_any
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -23,7 +24,7 @@ organize_names <- function(data, year, level = "hyp"){
     nh <- n %>%
       dplyr::filter(!duplicated(var17)) %>%
       dplyr::select(paste0("var", c(substr(year,3,4), 17))) %>%
-      dplyr::filter(!. == "" & !.== " ")
+      dplyr::filter(if_any("", " "))
     data <- data %>% dplyr::select(nh[,1])
     names(data) <- nh[,2]
   }
@@ -31,17 +32,17 @@ organize_names <- function(data, year, level = "hyp"){
     nh <- n %>%
       dplyr::filter((unidad == "H" | unidad == "G") & !duplicated(var17)) %>%
       dplyr::select(paste0("var", c(substr(year,3,4), 17))) %>%
-      dplyr::filter(!. == "" & !.== " ")
-    data <- data %>% dplyr::select(nh[,1])
-    names(data) <- nh[,2]
+      tidyr::drop_na()
+    #data <- data %>% dplyr::select(c(nh[,1]))
+    #names(data) <- nh[,2]
   }
   if(level %in% c("individual", "i")){
     nh <- n %>%
       dplyr::filter((unidad == "P" | unidad == "G") & !duplicated(var17)) %>%
       dplyr::select(paste0("var", c(substr(year,3,4), 17))) %>%
-      dplyr::filter(!. == "" & !.== " ")
-    data <- data %>% dplyr::select(nh[,1])
-    names(data) <- nh[,2]
+      tidyr::drop_na()
+    #data <- data %>% dplyr::select(nh[,1])
+    #names(data) <- nh[,2]
   }
   return(data)
 }
@@ -69,30 +70,32 @@ organize_names <- function(data, year, level = "hyp"){
 #     x
 # }
 
-# #' to_ascii
-# #'
-# #' @param x a column
-# #' @param upper logic
-# #'
-# #' @importFrom stringr str_replace_all
-# #' @return
-# #' @export
-# #' @examples
-# #' \donttest{
-# #' d <- lapply(dic, to_ascii)
-# #' }
-# to_ascii <- function(x, upper = T ){
-#   x <- x %>% as.character() %>%
-#     toupper() %>%
-#     stringr::str_replace_all("Ñ", "NI") %>%
-#     stringr::str_replace_all("Ó", "O") %>%
-#     stringr::str_replace_all("Á", "A") %>%
-#     stringr::str_replace_all("É", "E") %>%
-#     stringr::str_replace_all("Í", "I") %>%
-#     stringr::str_replace_all("Ú", "U")
-#   if (!upper == T) x <- tolower(x)
-#   x
-# }
+#' to_ascii
+#'
+#' @param x a column
+#' @param upper logic
+#'
+#' @importFrom stringr str_replace_all
+#' @return vector
+#' @export
+#' @examples
+#' \donttest{
+#' d <- lapply(dic, to_ascii)
+#' }
+to_ascii <- function(x, upper = T ){
+  x <- x %>% as.character() %>%
+    toupper() %>%
+    stringr::str_replace_all("\\u00D1", "NI") %>% # Ñ
+    stringr::str_replace_all("\\u00D3", "O") %>% # Ó
+    stringr::str_replace_all("\\u00C1", "A") %>% # Á
+    stringr::str_replace_all("\\u00C9", "E") %>% # É
+    stringr::str_replace_all("\\u00CD", "I") %>% # Í
+    stringr::str_replace_all("\\u00DA", "U") # Ú
+  if (!upper == T) x <- tolower(x)
+  x
+}
+
+# Para agregar más simbolos usar la función stringi::stri_escape_unicode para saber su raiz
 
 
 # dic <- read.csv2("data/diccionario.csv") #%>%
