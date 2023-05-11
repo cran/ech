@@ -67,7 +67,8 @@ get_estimation_mean <- function(data = ech::toy_ech_2018,
   options(dplyr.summarise.inform = FALSE)
 
 # estimation ----
-  if (is.factor(dplyr::pull(d[,variable]))) {
+
+  if (is.factor(d %>% dplyr::pull(variable))) {
     if(is.null(by.x) & is.null(by.y) & is.null(domain)){
       estimation <- design_ech %>%
         srvyr::group_by(!!!syms(variable)) %>%
@@ -209,7 +210,7 @@ get_estimation_median <- function(data = ech::toy_ech_2018,
 
   # estimation ----
 
-  if (is.numeric(dplyr::pull(d[,variable]))) {
+  if (is.numeric(d %>% dplyr::pull(variable))) {
     if (is.null(by.x) & is.null(by.y) & is.null(domain)) {
       estimation <- design_ech %>%
         srvyr::summarise(colname = srvyr::survey_median(!!!syms(variable), vartype = "ci"))
@@ -322,7 +323,7 @@ get_estimation_total <- function(data = ech::toy_ech_2018,
 
   # estimation ----
 
-  if (is.factor(dplyr::pull(d[,variable]))) {
+  if (is.factor(d %>% dplyr::pull(variable))) {
     if (is.null(by.x) & is.null(by.y) & is.null(domain)) {
       estimation <- design_ech %>%
         srvyr::group_by(!!!syms(variable)) %>%
@@ -656,7 +657,11 @@ get_estimation_gini <- function(data = ech::toy_ech_2018,
     b <-  as.factor((d[, by]))
     e <- as.integer(d[, estrato])
     i <-  as.integer(d[, ids])
-    estimation <- laeken::gini(inc = v, weights = p, design = e, cluster = i, var = "bootstrap", bootType = "naive", breakdown = b, seed = 1234, R = r)
+    suppressWarnings({
+    estimation <- laeken::gini(inc = v, weights = p, design = e, cluster = i,
+                               var = "bootstrap", bootType = "naive",
+                               breakdown = b, seed = 1234, R = r)
+    })
     suppressMessages({
       value <- estimation[[2]]
       value_total <- data.frame(dplyr::bind_cols("Total",estimation[[1]]))

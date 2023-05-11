@@ -3,6 +3,7 @@
 #' @param data data.frame contains the ECH microdata
 #' @param level (string) indicates whether the base to be labelled is of the type "household", "h", "individual", "i" or both, "hyp". Default "hyp"
 #' @param year numeric reference year of the data. Available from 2011 to 2019
+#' @return data.frame
 #' @export
 #' @importFrom dplyr if_any
 #' @details
@@ -17,14 +18,17 @@ organize_names <- function(data, year, level = "hyp"){
   assertthat::assert_that(is.data.frame(data))
   assertthat::assert_that(level %in% c("household", "h", "individual", "i", "hyp"),
                           msg = "Check the level selected")
-  assertthat::assert_that(year %in% 2011:2019,  msg = glue::glue("{year} not yet processed"))
-  assertthat::assert_that(year != 2017,  msg = glue::glue("{year} is the reference year"))
+  assertthat::assert_that(year %in% c(2011:2019, 2021:2022),
+                          msg = glue::glue("{year} not yet processed"))
+  assertthat::assert_that(year != 2017,
+                          msg = glue::glue("{year} is the reference year"))
   n <- ech::dic
   if(level %in% "hyp"){
     nh <- n %>%
       dplyr::filter(!duplicated(var17)) %>%
       dplyr::select(paste0("var", c(substr(year,3,4), 17))) %>%
-      dplyr::filter(if_any("", " "))
+      dplyr::filter(!.[,1] %in% c("", " ")) %>%
+      tidyr::drop_na()
     data <- data %>% dplyr::select(nh[,1])
     names(data) <- nh[,2]
   }
@@ -32,17 +36,19 @@ organize_names <- function(data, year, level = "hyp"){
     nh <- n %>%
       dplyr::filter((unidad == "H" | unidad == "G") & !duplicated(var17)) %>%
       dplyr::select(paste0("var", c(substr(year,3,4), 17))) %>%
+      dplyr::filter(!.[,1] %in% c("", " ")) %>%
       tidyr::drop_na()
-    #data <- data %>% dplyr::select(c(nh[,1]))
-    #names(data) <- nh[,2]
+    data <- data %>% dplyr::select(c(nh[,1]))
+    names(data) <- nh[,2]
   }
   if(level %in% c("individual", "i")){
     nh <- n %>%
       dplyr::filter((unidad == "P" | unidad == "G") & !duplicated(var17)) %>%
       dplyr::select(paste0("var", c(substr(year,3,4), 17))) %>%
+      dplyr::filter(!.[,1] %in% c("", " ")) %>%
       tidyr::drop_na()
-    #data <- data %>% dplyr::select(nh[,1])
-    #names(data) <- nh[,2]
+    data <- data %>% dplyr::select(nh[,1])
+    names(data) <- nh[,2]
   }
   return(data)
 }
@@ -51,7 +57,7 @@ organize_names <- function(data, year, level = "hyp"){
 # #' check_spelling_dptouy
 # #'
 # #' @param x a column with names of "Departamentos" of Uruguay
-# #' @param upper logic
+# #' @param upper logic. Default TRUE
 # #'
 # #' @return charcater vector with correct names of Departamentos
 # #' @export
@@ -59,21 +65,21 @@ organize_names <- function(data, year, level = "hyp"){
 # #' \donttest{
 # #' d <- check_spelling_dptouy(ech::toy_ech_2018$dpto)
 # #' }
-# check_spelling_dptouy <- function(x, upper = T){
+# check_spelling_dptouy <- function(x, upper = TRUE){
 #   x <- stringr::str_to_title(x) %>%
 #     gsub("Paysandu", "Paysandú", .) %>%
 #     gsub("Rio Negro", "Río Negro", .) %>%
 #     gsub("San Jose", "San José", .) %>%
 #     gsub("Tacuarembo", "Tacuarembó", .) %>%
 #     gsub("Treinta Y Tres", "Treinta y Tres", .)
-#     if (upper == T) x <- upper(x)
+#     if (upper == TRUE) x <- upper(x)
 #     x
 # }
 
 #' to_ascii
-#'
+#' @family organize
 #' @param x a column
-#' @param upper logic
+#' @param upper logic. Default TRUE
 #'
 #' @importFrom stringr str_replace_all
 #' @return vector
@@ -82,7 +88,7 @@ organize_names <- function(data, year, level = "hyp"){
 #' \donttest{
 #' d <- lapply(dic, to_ascii)
 #' }
-to_ascii <- function(x, upper = T ){
+to_ascii <- function(x, upper = TRUE){
   x <- x %>% as.character() %>%
     toupper() %>%
     stringr::str_replace_all("\\u00D1", "NI") %>% # Ñ
@@ -91,7 +97,7 @@ to_ascii <- function(x, upper = T ){
     stringr::str_replace_all("\\u00C9", "E") %>% # É
     stringr::str_replace_all("\\u00CD", "I") %>% # Í
     stringr::str_replace_all("\\u00DA", "U") # Ú
-  if (!upper == T) x <- tolower(x)
+  if (!upper == TRUE) x <- tolower(x)
   x
 }
 

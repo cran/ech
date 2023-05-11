@@ -50,6 +50,9 @@ years_of_schooling(
 
 \item{max_years}{Maximum years of schooling}
 }
+\value{
+data.frame
+}
 \description{
 This function allows you to calculate the years of schooling
 }
@@ -66,6 +69,7 @@ toy_ech_2018 <- years_of_schooling(data = ech::toy_ech_2018)
 Other education: 
 \code{\link{enrolled_school}()},
 \code{\link{level_completion}()},
-\code{\link{level_education}()}
+\code{\link{level_education}()},
+\code{\link{organize_educ}()}
 }
 \concept{education}

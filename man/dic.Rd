@@ -5,7 +5,7 @@
 \alias{dic}
 \title{A dataset containing variables names change of the ECH 2006-2018}
 \format{
-A data frame with 976 rows and 19 variables:
+A data frame with 976 rows and 21 variables:
 \describe{
   \item{codigos}{Code oh label}
   \item{descripcion}{Description of label}
@@ -26,11 +26,13 @@ A data frame with 976 rows and 19 variables:
   \item{var17}{ECH variables names 2017}
   \item{var18}{ECH variables names 2018}
   \item{var19}{ECH variables names 2019}
+  \item{var21}{ECH variables names 2021 segundo semestre}
+  \item{var22}{ECH variables names 2022 primer semestre}
   ...
 }
 }
 \source{
-\url{http://www.ine.gub.uy/}
+\url{https://www.gub.uy/instituto-nacional-estadistica/}
 }
 \usage{
 dic
@@ -47,7 +49,6 @@ Other dataset:
 \code{\link{cba_cbna_int}},
 \code{\link{cba_cbna_mdeo}},
 \code{\link{cba_cbna_rur}},
-\code{\link{ciiu4}},
 \code{\link{ipab_base2010_int}},
 \code{\link{ipab_base2010_mdeo}},
 \code{\link{ipab_base2010}},

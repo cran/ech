@@ -14,7 +14,19 @@
 
 <title>Estimación de ingresos</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -24,6 +36,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -107,13 +120,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -125,7 +145,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -141,55 +341,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>La medición de los ingresos tiene un rezago de un mes ya que si el hogar fue encuestado, por ejemplo en marzo, en este mes se preguntó por los ingresos del mes pasado, es decir de febrero. A su vez, estos ingresos están expresados a precios corrientes, por lo cual, para hacerlos comparables entre los diferentes meses de la encuesta o de otros años es necesario llevarlos a una medida común. Para convertir los ingresos de precios corrientes a precios constantes debemos elegir un índice como puede ser el IPC (Índice de Precios al Consumo) o el IPAB (Índice de Precios de Alimentos y Bebidas) para construir un deflactor. Por ejemplo, para expresar los ingresos del hogar con la información de la ECH 2019, elegimos como mes base junio y como año base 2019 y como deflactor el IPC. Esto implica que debemos considerar los valores del IPC mensual desde diciembre 2018 a noviembre 2019.</p>
-<p>Obtener los datos del IPC es bastante sencillo usando el paquete <code>ech</code>, para ello existe la fucnión de hecho la función <code>get_ipc()</code> que descarga el archivo de la web del INE y lo guarda en un formato tidy en el data frame <code>ipc_base2010</code>. La estructura del objeto es la siguiente:</p>
+<p>La medición de los ingresos tiene un rezago de un mes ya que si el
+hogar fue encuestado, por ejemplo en marzo, en este mes se preguntó por
+los ingresos del mes pasado, es decir de febrero. A su vez, estos
+ingresos están expresados a precios corrientes, por lo cual, para
+hacerlos comparables entre los diferentes meses de la encuesta o de
+otros años es necesario llevarlos a una medida común. Para convertir los
+ingresos de precios corrientes a precios constantes debemos elegir un
+índice como puede ser el IPC (Índice de Precios al Consumo) o el IPAB
+(Índice de Precios de Alimentos y Bebidas) para construir un deflactor.
+Por ejemplo, para expresar los ingresos del hogar con la información de
+la ECH 2019, elegimos como mes base junio y como año base 2019 y como
+deflactor el IPC. Esto implica que debemos considerar los valores del
+IPC mensual desde diciembre 2018 a noviembre 2019.</p>
+<p>Obtener los datos del IPC es bastante sencillo usando el paquete
+<code>ech</code>, para ello existe la fucnión de hecho la función
+<code>get_ipc()</code> que descarga el archivo de la web del INE y lo
+guarda en un formato tidy en el data frame <code>ipc_base2010</code>. La
+estructura del objeto es la siguiente:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(ech<span class="sc">::</span>ipc_base2010)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 x 5</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   fecha      indice             mensual               acum_ano    acum_12_meses </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;              &lt;chr&gt;                 &lt;chr&gt;       &lt;chr&gt;         </span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2019-07-01 197.94             0.76000000000000001   6.07000000~ 7.54          </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2019-08-01 199.69             0.88                  7           7.75999999999~</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2019-09-01 200.72             0.52000000000000002   7.55999999~ 7.78000000000~</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2019-10-01 202.22999999999999 0.75                  8.35999999~ 8.33999999999~</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2019-11-01 203.08000000000001 0.41999999999999998   8.82000000~ 8.40000000000~</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 2019-12-01 203.02000000000001 -0.029999999999999999 8.78999999~ 8.78999999999~</span></span></code></pre></div>
-<p>La función que permite obtener un deflactor es la función deflate(), que a su vez, utiliza internamente la función <code>get_ipc()</code>. No utilizamos directamente ninguna de estas funciones, sino que la simplicidad de ech radica en que para calcular ingresos a precios constantes usamos la función <code>income_constant_prices()</code> la cual utiliza internamente las otras dos funciones ya mencionadas.</p>
-<p>Antes de deflactar los ingresos del hogar, tenemos que tener cargado el objeto con los microdatos de la ECH.</p>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 8</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   fecha      indice        mensual acum_ano acum_12_meses trimestre cuatrimestre</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;date&gt;     &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;     &lt;chr&gt;       </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2022-03-01 250.41999999… 1.1100… 4.41999… 9.3800000000… 4.424335… 4.319933347…</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2022-04-01 251.65000000… 0.4899… 4.94000… 9.3699999999… 3.097218… 4.937241983…</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2022-05-01 252.81999999… 0.4600… 5.42999… 9.3699999999… 2.075258… 3.576549633…</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2022-06-01 254.30000000… 0.5899… 6.04     9.2899999999… 1.549397… 2.672803617…</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2022-07-01 256.25999999… 0.7700… 6.86000… 9.5600000000… 1.831909… 2.332082102…</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 2022-08-01 258.38        0.8299… 7.74000… 9.5299999999… 2.199193… 2.674349294…</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 1 more variable: semestre &lt;chr&gt;</span></span></code></pre></div>
+<p>La función que permite obtener un deflactor es la función deflate(),
+que a su vez, utiliza internamente la función <code>get_ipc()</code>. No
+utilizamos directamente ninguna de estas funciones, sino que la
+simplicidad de ech radica en que para calcular ingresos a precios
+constantes usamos la función <code>income_constant_prices()</code> la
+cual utiliza internamente las otras dos funciones ya mencionadas.</p>
+<p>Antes de deflactar los ingresos del hogar, tenemos que tener cargado
+el objeto con los microdatos de la ECH.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ech)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">get_microdata</span>(<span class="at">year =</span> <span class="dv">2019</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">organize_names</span>(df)</span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">get_microdata</span>(<span class="at">year =</span> <span class="dv">2019</span>, <span class="at">folder =</span> <span class="fu">tempdir</span>(), <span class="at">toR =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#df &lt;- organize_names(df)</span></span></code></pre></div>
 <p>Las variables a tener en cuenta en esta parte son:</p>
 <ul>
-<li><code>ht11</code>: Ingreso total del hogar con valor locativo sin servicio doméstico</li>
+<li><code>ht11</code>: Ingreso total del hogar con valor locativo sin
+servicio doméstico</li>
 <li><code>ht13</code>: Valor locativo</li>
 <li><code>ht19</code>: Cantidad de personas sin servicio doméstico</li>
 <li><code>numero</code>: Identificador del hogar</li>
 </ul>
-<p>Para convertir los ingresos del hogar, que están medidos en la variable <code>ht11</code>, de precios corrientes a precios constantes, usamos la función <code>income_constant_prices()</code> y definimos sus parámetros: mes base (<code>base_month</code>), año base (<code>base_year</code>), el tipo de índice (<code>index</code>) que puede IPC o IPAB y el nivel del índice (<code>level</code>) que puede ser “G” (general) o “R” (regional que distingue entre Montevideo e Interior). Definimos como base enero de 2005.</p>
+<p>Para convertir los ingresos del hogar, que están medidos en la
+variable <code>ht11</code>, de precios corrientes a precios constantes,
+usamos la función <code>income_constant_prices()</code> y definimos sus
+parámetros: mes base (<code>base_month</code>), año base
+(<code>base_year</code>), el tipo de índice (<code>index</code>) que
+puede IPC o IPAB y el nivel del índice (<code>level</code>) que puede
+ser “G” (general) o “R” (regional que distingue entre Montevideo e
+Interior). Definimos como base enero de 2005.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">income_constant_prices</span>(<span class="at">data =</span> df, <span class="at">base_month =</span> <span class="dv">1</span>, <span class="at">base_year =</span> <span class="dv">2005</span>, <span class="at">index =</span> <span class="st">&quot;IPC&quot;</span>, <span class="at">level =</span> <span class="st">&quot;G&quot;</span>)</span></code></pre></div>
 <p>Esto crea una serie de variables:</p>
 <ul>
 <li><code>y_pc</code>: ingreso per cápita a precios corrientes</li>
 <li><code>y_pc_d</code>: ingreso per cápita a precios constantes</li>
 <li><code>rv_d</code>: valor locativo a precios constantes</li>
-<li><code>y_wrv_d</code>: ingreso sin valor locativo a precios constantes</li>
-<li><code>y_wrv_pc_d</code>: ingreso sin valor locativo per cápita a precios constantes</li>
+<li><code>y_wrv_d</code>: ingreso sin valor locativo a precios
+constantes</li>
+<li><code>y_wrv_pc_d</code>: ingreso sin valor locativo per cápita a
+precios constantes</li>
 </ul>
-<p>Para obtener la estimación de alguna de estas variables usamos la función <code>get_estimation_mean()</code>, para estimar la media, <code>get_estimation_total()</code>, para estimar el total o <code>get_estimation_median()</code> para estimar la mediana. Estas funciones tienen algunos argumentos que refieren al diseño de muestreo como:</p>
+<p>Para obtener la estimación de alguna de estas variables usamos la
+función <code>get_estimation_mean()</code>, para estimar la media,
+<code>get_estimation_total()</code>, para estimar el total o
+<code>get_estimation_median()</code> para estimar la mediana. Estas
+funciones tienen algunos argumentos que refieren al diseño de muestreo
+como:</p>
 <ul>
-<li><code>numero</code>: se debe indicar la variable que identifica a los hogares</li>
-<li><code>pesoano</code>: se debe indicar la variable uqe identifica los pesos asociados a cada hogar.</li>
-<li><code>ids</code>: se debe indicar la variable que identifica a la unidades primarias de muestreo.</li>
-<li><code>estrato</code>: se debe indicar la variable que identifica a los estratos.</li>
+<li><code>numero</code>: se debe indicar la variable que identifica a
+los hogares</li>
+<li><code>pesoano</code>: se debe indicar la variable uqe identifica los
+pesos asociados a cada hogar.</li>
+<li><code>ids</code>: se debe indicar la variable que identifica a la
+unidades primarias de muestreo.</li>
+<li><code>estrato</code>: se debe indicar la variable que identifica a
+los estratos.</li>
 </ul>
-<p>Para los microdatos de 2018 y 2019 la ECH pública cuenta con la información de las UPM y estratos. En la web del INE se encuentra en un archivo aparte pero la función <code>get_microdata()</code> ya la agrega a los microdatos que genera de manera que no es necesario hacer un merge entre ambas bases. Para años anteriores no están disponible estás variables en la base pública.</p>
-<p>Es necesario definir <code>ids</code> y <code>estrato</code> que vienen con valor por defecto NULL, las demás se pueden dejar con sus valores por defecto, salvo que se usen registros de un mes o semestre en ese caso se debe cambiar el ponderador de los casos según corresponda.</p>
+<p>Para los microdatos de 2018 y 2019 la ECH pública cuenta con la
+información de las UPM y estratos. En la web del INE se encuentra en un
+archivo aparte pero la función <code>get_microdata()</code> ya la agrega
+a los microdatos que genera de manera que no es necesario hacer un merge
+entre ambas bases. Para años anteriores no están disponible estás
+variables en la base pública.</p>
+<p>Es necesario definir <code>ids</code> y <code>estrato</code> que
+vienen con valor por defecto NULL, las demás se pueden dejar con sus
+valores por defecto, salvo que se usen registros de un mes o semestre en
+ese caso se debe cambiar el ponderador de los casos según
+corresponda.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_estimation_mean</span>(df, <span class="at">variable =</span> <span class="st">&quot;y_pc_d&quot;</span>, <span class="at">level =</span> <span class="st">&quot;i&quot;</span>, <span class="at">ids =</span> <span class="st">&quot;upm&quot;</span>, <span class="at">estrato =</span> <span class="st">&quot;estrato&quot;</span>)</span></code></pre></div>
-<p>Para estimar el ingreso medio de los hogares a precios constantes de enero 2005 según departamento, se debe definir en el argumento by.x la variable “nomdpto”</p>
+<p>Para estimar el ingreso medio de los hogares a precios constantes de
+enero 2005 según departamento, se debe definir en el argumento by.x la
+variable “nomdpto”</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimación de ingresos promedio per cápita a pesos constantes de ene/05 según dpto</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_estimation_mean</span>(df, <span class="at">variable =</span> <span class="st">&quot;y_pc_d&quot;</span>, <span class="at">by.x =</span> <span class="st">&quot;nomdpto&quot;</span>, <span class="at">level =</span> <span class="st">&quot;i&quot;</span>, <span class="at">ids =</span> <span class="st">&quot;upm&quot;</span>, <span class="at">estrato =</span> <span class="st">&quot;estrato&quot;</span>)</span></code></pre></div>
 <!-- Una forma de mostrar estos resultados es mediante un gráfico como el siguiente: -->
-<p>Podemos comparar estos resultados con los publicados por el Observatorio Territorio Uruguay de OPP que se encuentran <a href="https://otu.opp.gub.uy/?q=listados/listados_datos_formato&amp;id=2727&amp;cant=0&amp;fecha=2019-01-01">aquí</a>.</p>
+<p>Podemos comparar estos resultados con los publicados por el
+Observatorio Territorio Uruguay de OPP que se encuentran <a href="https://otu.opp.gub.uy/?q=listados/listados_datos_formato&amp;id=2727&amp;cant=0&amp;fecha=2019-01-01">aquí</a>.</p>
 
 
 

@@ -50,6 +50,9 @@ level_education(
 
 \item{e49}{Variable name of attendance school ever}
 }
+\value{
+data.frame
+}
 \description{
 This function allows you to calculate the highest level of education achieved
 }
@@ -66,6 +69,7 @@ toy_ech_2018 <- level_education(data = ech::toy_ech_2018)
 Other education: 
 \code{\link{enrolled_school}()},
 \code{\link{level_completion}()},
+\code{\link{organize_educ}()},
 \code{\link{years_of_schooling}()}
 }
 \concept{education}

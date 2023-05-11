@@ -1,5 +1,21 @@
 # log history of ech package development
 
+## ech v0.1.3 (in progress) 
+* Add to dictionary variables of ech 2021
+* Add function organize_e193
+* minor changes. fix dplyr::between error
+* update get_microdata (delete files)
+* comment get_ipab (link removed)
+* fix tidyselect warnings
+* comment get_ipc (link removed)
+* comment get_dictionary (changed extension)
+* comment get_ipc_region (link removed)
+* comment get_cba_cbna (link removed)
+* comment get_ipab_region (link removed)
+* comment test_get_dictionary 
+* comment tes_get_ipc 
+* remove readxl and purrr from description
+
 ## ech v0.1.2.0
 *minor changes. fix organize_names
 

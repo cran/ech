@@ -585,7 +585,7 @@
 #'   \item{estrato}{ }
 #'   ...
 #' }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -609,7 +609,7 @@
 #'   \item{region_4}{}
 #'   ...
 #' }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -619,7 +619,7 @@
 
 #' A dataset containing variables names change of the ECH 2006-2018
 #' @family dataset
-#' @format A data frame with 976 rows and 19 variables:
+#' @format A data frame with 976 rows and 21 variables:
 #' \describe{
 #'   \item{codigos}{Code oh label}
 #'   \item{descripcion}{Description of label}
@@ -640,46 +640,15 @@
 #'   \item{var17}{ECH variables names 2017}
 #'   \item{var18}{ECH variables names 2018}
 #'   \item{var19}{ECH variables names 2019}
+#'   \item{var21}{ECH variables names 2021 segundo semestre}
+#'   \item{var22}{ECH variables names 2022 primer semestre}
 #'   ...
 #'}
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
 "dic"
-
-
-#' A dataset containing Clasificación Industrial Internacional Uniforme Rev. 4 and 3
-#' @family dataset
-#' @format A data frame with 738 rows and 3 variables:
-#' \describe{
-#'   \item{ciiu_4}{Code of Clasificación Industrial Internacional Uniforme Rev. 4}
-#'   \item{description}{Description of Clasificación Industrial Internacional Uniforme Rev. 4}
-#'   \item{ciiu_3}{Code of Clasificación Industrial Internacional Uniforme Rev. 3}
-#'   ...
-#'  }
-#' @source \url{http://www.ine.gub.uy/}
-#' @details
-#' Disclaimer: This script is not an official INE product.
-#' Aviso: El script no es un producto oficial de INE.
-"ciiu4"
-
-
-#' A dataset containing the IPC base 2010
-#' @family dataset
-#' @format A data frame with 990 rows and 5 variables:
-#' \describe{
-#'   \item{fecha}{date from 1937 to 2019}
-#'   \item{indice}{IPC}
-#'   \item{mensual}{value of IPC}
-#'   \item{acum_ano}{acumulated IPC}
-#'   \item{acum_12_meses}{acumulated IPC last 12 month}
-#'  }
-#' @source \url{http://www.ine.gub.uy/}
-#' @details
-#' Disclaimer: This script is not an official INE product.
-#' Aviso: El script no es un producto oficial de INE.
-"ipc_base2010"
 
 
 #' A dataset containing the IPC base 2010 only for the Interior region
@@ -689,7 +658,7 @@
 #'   \item{fecha}{date from 2011 to 2019}
 #'   \item{indice}{IPC}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -702,7 +671,7 @@
 #'   \item{fecha}{date from 2011 to 2019}
 #'   \item{indice}{IPC}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -717,7 +686,7 @@
 #'   \item{cbna}{CBNA}
 #'   \item{cbt_lp}{CBT}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -732,7 +701,7 @@
 #'   \item{cbna}{CBNA}
 #'   \item{cbt_lp}{CBT}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -748,7 +717,7 @@
 #'   \item{cbna}{CBNA}
 #'   \item{cbt_lp}{CBT}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -762,7 +731,7 @@
 #'   \item{fecha}{date from 1997 to 2020}
 #'   \item{indice}{IPAB}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -775,7 +744,7 @@
 #'   \item{fecha}{date from 2011 to 2019}
 #'   \item{indice}{IPAB}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -788,7 +757,7 @@
 #'   \item{fecha}{date from 2011 to 2019}
 #'   \item{indice}{IPAB}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
@@ -804,8 +773,27 @@
 #'   \item{upm_sav}{url for upm download}
 #'   \item{dic}{url for dictionary download}
 #'  }
-#' @source \url{http://www.ine.gub.uy/}
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
 #' @details
 #' Disclaimer: This script is not an official INE product.
 #' Aviso: El script no es un producto oficial de INE.
 "urls_ine"
+
+#' A dataset containing the IPC base 2010
+#' @family dataset
+#' @format A data frame with 990 rows and 5 variables:
+#' \describe{
+#'   \item{fecha}{date from 1937 to 2019}
+#'   \item{indice}{IPC}
+#'   \item{mensual}{mensual value of IPC}
+#'   \item{trimestre}{three-month period value of IPC}
+#'   \item{cuatrimestre}{four-month period value of IPC}
+#'   \item{semestre}{six-month period value of IPC}
+#'   \item{acum_ano}{acumulated IPC}
+#'   \item{acum_12_meses}{acumulated IPC last 12 month}
+#'  }
+#' @source \url{https://www.gub.uy/instituto-nacional-estadistica/}
+#' @details
+#' Disclaimer: This script is not an official INE product.
+#' Aviso: El script no es un producto oficial de INE.
+"ipc_base2010"
